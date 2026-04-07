@@ -8,7 +8,7 @@ By [HSAN Studios](https://HSAN-Studios.com) — A Private Limited Company
 
 ## About
 
-ARC3D™ is a browser-based architectural CAD application for designing buildings in 2D and 3D. Built with Babylon.js for real-time WebGL rendering, it runs entirely client-side with no backend or build step required.
+ARC3D™ is a browser-based architectural CAD application for designing buildings in 2D and 3D. Built with Babylon.js for real-time WebGL rendering, it features a Node.js cloud backend for cross-device login and project sync, with full offline support via IndexedDB.
 
 ## Live Demo
 
@@ -27,6 +27,10 @@ ARC3D™ is a browser-based architectural CAD application for designing building
 - **Export** — PDF and DXF output with title blocks
 - **Undo/Redo** — Full history tracking for all operations
 - **Auto-Save** — Periodic saves to IndexedDB and localStorage
+- **Cloud Sync** — Log in to access projects from any device (Node.js/MongoDB backend)
+- **User Accounts** — Registration, login, email confirmation, JWT authentication
+- **Payments** — PayPal integration with purchase history and subscription management
+- **GDPR Compliant** — UK GDPR data protection policy, data subject rights, breach procedures
 
 ## Tech Stack
 
@@ -38,7 +42,10 @@ ARC3D™ is a browser-based architectural CAD application for designing building
 | jsPDF | PDF export |
 | Earcut | Polygon triangulation |
 | Font Awesome 6.4 | UI icons |
-| IndexedDB | Project storage |
+| IndexedDB | Local project storage |
+| MongoDB | Cloud database (user accounts, projects) |
+| Express.js | REST API server |
+| JWT + bcrypt | Authentication & password security |
 | Electron | Desktop app wrapper |
 
 ## Files
@@ -48,12 +55,25 @@ ARC3D™ is a browser-based architectural CAD application for designing building
 | `arc3d.html` | Main application |
 | `index.html` | Marketing landing page & project launcher |
 | `arc3d-help.html` | Help & keyboard shortcuts reference |
+| `gdpr.html` | UK GDPR data protection policy |
+| `database/` | IndexedDB managers + API client |
+| `database/server/` | Node.js/Express/MongoDB backend |
 | `ARC3D-APP/` | Electron desktop wrapper |
 | `Backups/` | Manual snapshots |
 
 ## Getting Started
 
 No build system required. Open `index.html` in a modern browser to access the landing page, or open `arc3d.html` directly to launch the app.
+
+### Cloud Server
+
+```bash
+cd database/server
+npm install
+node server.js
+```
+
+Requires MongoDB running locally (or set `MONGODB_URI` in `database/server/.env` to a MongoDB Atlas connection string). See `database/server/.env.example` for configuration.
 
 ### GitHub Pages Hosting
 
@@ -102,6 +122,9 @@ Requires a WebGL-capable browser. Tested on Chrome, Edge, and Firefox.
 index.html             ← Landing page (entry point)
 arc3d.html             ← Main CAD application
 arc3d-help.html        ← Help & shortcuts reference
+gdpr.html              ← UK GDPR data protection policy
+database/              ← IndexedDB managers + cloud API client
+database/server/       ← Node.js/Express/MongoDB backend
 build/vendor/          ← Babylon.js, jsPDF, Earcut, Font Awesome
 styles/                ← CSS
 ARC3D-APP/             ← Electron desktop wrapper
