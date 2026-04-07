@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC3D™ — Help</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0f0f0f;
+            --surface: #1a1a1a;
+            --surface2: #262626;
+            --surface3: #303030;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.15);
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --text-dim: #707070;
+            --accent: #3b82f6;
+            --accent-dim: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.1);
+            --link: #3b82f6;
+            --code-bg: rgba(255, 255, 255, 0.05);
+            --kbd-bg: rgba(255, 255, 255, 0.05);
+            --kbd-border: rgba(255, 255, 255, 0.1);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --danger: #ef4444;
+            --search-highlight: rgba(59, 130, 246, 0.25);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            font-size: 14.5px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══════════════ HEADER ═══════════════ */
+        .header {
+            background: rgba(50, 50, 50, 0.75);
+            border-bottom: 1px solid var(--border);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+        .header-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            height: 56px;
+            gap: 24px;
+        }
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .header-brand .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text);
+        }
+        .header-brand .tag {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border: 1px solid var(--border);
+        }
+
+        /* Search */
+        .header-search {
+            flex: 1;
+            max-width: 420px;
+            position: relative;
+        }
+        .header-search svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            pointer-events: none;
+        }
+        .header-search input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 7px 12px 7px 34px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .header-search input::placeholder { color: var(--text-dim); }
+        .header-search input:focus { border-color: var(--accent); }
+        .search-results-count {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        .header-nav { display: flex; gap: 18px; margin-left: auto; flex-shrink: 0; }
+        .header-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .header-nav a:hover { color: var(--accent); }
+
+        /* ═══════════════ LAYOUT ═══════════════ */
+        .layout {
+            display: flex;
+            max-width: 1300px;
+            margin: 0 auto;
+            min-height: calc(100vh - 56px);
+        }
+
+        /* ═══════════════ SIDEBAR ═══════════════ */
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 56px;
+            height: calc(100vh - 56px);
+            overflow-y: auto;
+        }
+        .sidebar::-webkit-scrollbar { width: 3px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+        .toc-group { margin-bottom: 16px; }
+        .toc-group-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            padding: 0 20px 4px;
+        }
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .toc-link i { font-size: 11px; width: 14px; text-align: center; opacity: 0.6; }
+        .toc-link svg { display: none; }
+        .toc-link:hover svg { opacity: 0.85; }
+        .toc-link.active svg { opacity: 1; }
+        .toc-link:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); border-left-color: var(--border-light); }
+        .toc-link.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); }
+
+        /* ═══════════════ CONTENT ═══════════════ */
+        .content {
+            flex: 1;
+            padding: 40px 56px 120px;
+            max-width: 880px;
+            min-width: 0;
+        }
+
+        /* Section headers */
+        h2 {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text);
+            margin: 56px 0 8px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.02em;
+            scroll-margin-top: 72px;
+        }
+        h2:first-child { margin-top: 0; }
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 32px 0 10px;
+            scroll-margin-top: 72px;
+        }
+        h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 22px 0 6px;
+        }
+        p { margin: 8px 0; }
+        ul, ol { margin: 8px 0 8px 22px; }
+        li { margin: 3px 0; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 22px;
+            font-size: 13.5px;
+        }
+        thead th {
+            text-align: left;
+            padding: 9px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+        tbody td {
+            padding: 8px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+        tbody tr:hover { background: rgba(255, 255, 255, 0.05); }
+
+        /* Keyboard keys */
+        kbd {
+            display: inline-block;
+            background: var(--kbd-bg);
+            border: 1px solid var(--kbd-border);
+            padding: 1px 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--text);
+            line-height: 1.6;
+            white-space: nowrap;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12.5px;
+            color: var(--text);
+        }
+
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Callouts */
+        .callout {
+            border-left: 3px solid var(--info);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            margin: 14px 0;
+            font-size: 13.5px;
+        }
+        .callout.tip { border-left-color: var(--success); }
+        .callout.warn { border-left-color: var(--warning); }
+        .callout.danger { border-left-color: var(--danger); }
+        .callout-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        .callout .callout-label { color: var(--info); }
+        .callout.tip .callout-label { color: var(--success); }
+        .callout.warn .callout-label { color: var(--warning); }
+        .callout.danger .callout-label { color: var(--danger); }
+
+        /* Numbered steps */
+        .steps { counter-reset: step; list-style: none; margin-left: 0; padding-left: 0; }
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding-left: 34px;
+            margin: 10px 0;
+        }
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Feature cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 12px;
+            margin: 16px 0 24px;
+        }
+        .feature-card {
+            background: transparent;
+            border: 1px solid transparent;
+            padding: 14px 16px;
+            transition: all 0.2s ease;
+        }
+        .feature-card:hover { border-color: var(--border); background: rgba(50, 50, 50, 0.75); }
+        .feature-card h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .feature-card p {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+
+        /* Divider */
+        hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+        /* Search highlight */
+        mark {
+            background: var(--search-highlight);
+            color: var(--text);
+            padding: 0 2px;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 36px;
+            height: 36px;
+            background: rgba(50, 50, 50, 0.75);
+            border: 1px solid var(--border);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            color: var(--text-muted);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.2s ease;
+        }
+        .back-to-top:hover { color: var(--accent); border-color: var(--accent); }
+        .back-to-top.visible { display: flex; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-dim);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.5px;
+        }
+
+        /* Shortcut grid */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 6px 16px;
+            margin: 12px 0 20px;
+            font-size: 13.5px;
+        }
+        .shortcut-grid kbd { justify-self: start; }
+
+        .swatch-blue { color: #3b82f6; }
+        .swatch-green { color: #22c55e; }
+        .swatch-amber { color: #f59e0b; }
+        .swatch-red { color: #ef4444; }
+
+        /* Print */
+        @media print {
+            .sidebar, .header, .back-to-top { display: none !important; }
+            .content { max-width: 100%; padding: 20px; }
+            body { background: #fff; color: #111; font-size: 12px; }
+            h2 { color: #222; border-bottom-color: #ccc; }
+            .callout { border-left-color: #999; background: #f5f5f5; }
+            kbd { border-color: #ccc; background: #eee; }
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .sidebar { display: none; }
+            .content { padding: 28px 20px 80px; }
+            .header-inner { padding: 0 16px; }
+            .header-search { max-width: 280px; }
+            .header-nav { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════ HEADER ════════════════════ -->
+<header class="header">
+    <div class="header-inner">
+        <div class="header-brand">
+            <span class="logo">ARC3D™</span>
+            <span class="tag">HELP</span>
+        </div>
+        <div class="header-search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Search help topics..." autocomplete="off">
+            <span class="search-results-count" id="searchCount"></span>
+        </div>
+        <nav class="header-nav">
+            <a href="#getting-started">Start</a>
+            <a href="#tools">Tools</a>
+            <a href="#shortcuts">Shortcuts</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ════════════════════ LAYOUT ════════════════════ -->
+<div class="layout">
+
+<!-- ──── Sidebar TOC ──── -->
+<aside class="sidebar" id="sidebar">
+    <div class="toc-group">
+        <div class="toc-group-title">Getting Started</div>
+        <a class="toc-link" href="#overview">Overview</a>
+        <a class="toc-link" href="#getting-started">Quick Start</a>
+        <a class="toc-link" href="#interface">Interface</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Building Tools</div>
+        <a class="toc-link" href="#walls">Walls</a>
+        <a class="toc-link" href="#curved-walls">Curved Walls</a>
+        <a class="toc-link" href="#doors-windows">Doors &amp; Windows</a>
+        <a class="toc-link" href="#floors-ceilings">Floors &amp; Ceilings</a>
+        <a class="toc-link" href="#roofs">Roofs</a>
+        <a class="toc-link" href="#stairs">Staircases</a>
+        <a class="toc-link" href="#columns">Columns</a>
+        <a class="toc-link" href="#beams">Beams</a>
+        <a class="toc-link" href="#foundations">Foundations</a>
+        <a class="toc-link" href="#topography">Topography</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Drawing &amp; Shapes</div>
+        <a class="toc-link" href="#drawing-tools">2D Drawing</a>
+        <a class="toc-link" href="#shapes-3d">3D Shapes</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">View &amp; Navigation</div>
+        <a class="toc-link" href="#view-modes">2D / 3D Modes</a>
+        <a class="toc-link" href="#camera">Camera Controls</a>
+        <a class="toc-link" href="#view-cube">View Cube</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Editing</div>
+        <a class="toc-link" href="#selection">Selection</a>
+        <a class="toc-link" href="#transform">Transform</a>
+        <a class="toc-link" href="#properties">Properties</a>
+        <a class="toc-link" href="#layers">Layers</a>
+        <a class="toc-link" href="#undo-redo">Undo / Redo</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Measurement</div>
+        <a class="toc-link" href="#measurements">Measurements</a>
+        <a class="toc-link" href="#annotations">Annotations</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Files &amp; Export</div>
+        <a class="toc-link" href="#save-load">Save &amp; Load</a>
+        <a class="toc-link" href="#export">Export</a>
+    </div>
+    <div class="toc-group">
+        <div class="toc-group-title">Reference</div>
+        <a class="toc-link" href="#multi-story">Multi-Story</a>
+        <a class="toc-link" href="#materials">Materials</a>
+        <a class="toc-link" href="#grid-snap">Grid &amp; Snap</a>
+        <a class="toc-link" href="#settings">Settings</a>
+        <a class="toc-link" href="#analysis">Analysis</a>
+        <a class="toc-link" href="#shortcuts">All Shortcuts</a>
+        <a class="toc-link" href="#faq">FAQ</a>
+    </div>
+</aside>
+
+<!-- ──── Main Content ──── -->
+<main class="content" id="content">
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="overview">Overview</h2>
+
+<p>ARC3D™ is a professional architectural design application for creating building plans, 3D models, and construction documentation. It provides a complete 2D drafting and 3D modelling environment powered by the Babylon.js rendering engine.</p>
+
+<div class="feature-grid">
+    <div class="feature-card">
+        <h5>Building Design</h5>
+        <p>Walls, doors, windows, roofs, floors, staircases, columns, beams, and foundations.</p>
+    </div>
+    <div class="feature-card">
+        <h5>Precision Drafting</h5>
+        <p>CAD input, grid snapping, ortho mode, auto-dimensions, and angle presets.</p>
+    </div>
+    <div class="feature-card">
+        <h5>Dual View Mode</h5>
+        <p>Switch between 2D orthographic drafting and 3D perspective views instantly.</p>
+    </div>
+    <div class="feature-card">
+        <h5>Professional Export</h5>
+        <p>PDF drawings with title blocks, DXF for CAD, and OBJ/GLB for 3D.</p>
+    </div>
+    <div class="feature-card">
+        <h5>Multi-Story</h5>
+        <p>Level presets from Basement to 4th Floor with custom elevation support.</p>
+    </div>
+    <div class="feature-card">
+        <h5>Project Database</h5>
+        <p>Auto-save, undo/redo, project management, and IndexedDB storage.</p>
+    </div>
+</div>
+
+<div class="callout">
+    <div class="callout-label">Note</div>
+    All measurements in the interface are displayed in <strong>millimetres (mm)</strong>. Internally, the application uses metres for 3D scene calculations.
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="getting-started">Quick Start</h2>
+
+<h3>First Launch</h3>
+<p>When ARC3D™ opens, you are placed in <strong>2D orthographic mode</strong> with a grid and rulers visible. The default tool is the pointer (select mode). You can immediately begin drawing walls or switch to 3D view.</p>
+
+<h3>Drawing Your First Room</h3>
+<ol class="steps">
+    <li>Press <kbd>W</kbd> to activate the <strong>Wall</strong> tool.</li>
+    <li>Click on the canvas to set the wall's start point.</li>
+    <li>Move the mouse — a live preview shows the wall length and angle.</li>
+    <li>Click again to set the end point. A confirmation dialog appears with editable Length, Angle, and Height fields.</li>
+    <li>Press <kbd>Enter</kbd> to confirm. With <strong>Continuous Mode</strong> on (default), the next wall starts from the previous endpoint.</li>
+    <li>Draw three more walls to complete a rectangle. Press <kbd>Escape</kbd> to stop drawing.</li>
+    <li>Press <kbd>Tab</kbd> to switch to 3D view and see your room in perspective.</li>
+    <li>Press <kbd>Ctrl</kbd>+<kbd>S</kbd> to save your project.</li>
+</ol>
+
+<div class="callout tip">
+    <div class="callout-label">Tip</div>
+    Hold <kbd>Shift</kbd> while drawing to constrain walls to orthogonal angles (0°, 90°, 180°, 270°).
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="interface">Interface Layout</h2>
+
+<h3>Header Bar</h3>
+<table>
+    <thead><tr><th>Element</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Logo &amp; Title</td><td>ARC3D™ branding</td></tr>
+        <tr><td>Share &amp; Export</td><td>Dropdown — PDF, CAD (DXF), and 3D (OBJ/GLB) export</td></tr>
+        <tr><td>Zoom Controls</td><td>Zoom In / Zoom Out buttons</td></tr>
+        <tr><td>Wireframe</td><td>Toggle wireframe rendering (<kbd>Z</kbd>)</td></tr>
+        <tr><td>Fullscreen</td><td>Enter fullscreen (<kbd>F11</kbd>)</td></tr>
+        <tr><td>Help</td><td>Shortcuts modal (<kbd>H</kbd>)</td></tr>
+        <tr><td>Notifications</td><td>Notification bell with unread badge</td></tr>
+        <tr><td>Settings</td><td>Gear icon — opens Settings panel</td></tr>
+    </tbody>
+</table>
+
+<h3>Left Sidebar Menus</h3>
+<table>
+    <thead><tr><th>Button</th><th>Category</th><th>Contents</th></tr></thead>
+    <tbody>
+        <tr><td>BUILD</td><td>Structure &amp; Openings</td><td>Wall, Curved Wall, Floor, Ceiling, Roof, Stairs, Column, Beam, Foundation, Topography, Door, Window, Opening</td></tr>
+        <tr><td>SHAPES</td><td>3D Primitives</td><td>Box, Cylinder, Sphere, Hemisphere, Cone, Pyramid, Hex Prism, Tri Prism, Torus, Capsule, Plane</td></tr>
+        <tr><td>DRAW</td><td>2D Drawing</td><td>Lines, Curves, Polylines, Splines, Basic Shapes, Arrows &amp; Symbols</td></tr>
+        <tr><td>MEASURE</td><td>Measurement &amp; Annotation</td><td>Area, Text, Dimension, Angle, Leader, Bubble, Callout, Cloud, Section Mark</td></tr>
+        <tr><td>ANALYZE</td><td>Analysis</td><td>Compliance, Energy, Structural, Report</td></tr>
+        <tr><td>SAVE</td><td>Project Database</td><td>Save/load projects, auto-save management</td></tr>
+    </tbody>
+</table>
+
+<h3>Floating Mode Toolbar</h3>
+<ul>
+    <li><strong>Layers</strong> — Shows active layer name; opens layer management dropdown</li>
+    <li><strong>2D</strong> — Switch to 2D orthographic mode</li>
+    <li><strong>3D</strong> — Switch to 3D perspective mode</li>
+    <li><strong>Views</strong> — Opens the Views panel: interactive View Cube, elevation presets (Front, Back, Left, Right, Top, Bottom, isometric corners), Active View indicator, Exit Elevation View, and camera settings (Distance, View Height, Zoom)</li>
+</ul>
+
+<h3>Status Bar</h3>
+<table>
+    <thead><tr><th>Indicator</th><th>Shows</th></tr></thead>
+    <tbody>
+        <tr><td>Status</td><td>"Ready" or active tool status</td></tr>
+        <tr><td>Coordinates</td><td>X / Y / Z cursor position</td></tr>
+        <tr><td>Selection</td><td>Selected element info</td></tr>
+        <tr><td>Mode</td><td>2D Mode / 3D Mode</td></tr>
+        <tr><td>Objects</td><td>Total building objects in scene</td></tr>
+        <tr><td>Connection</td><td>Online / Offline</td></tr>
+        <tr><td>Clock</td><td>Current time</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="walls">Walls</h2>
+
+<h3>Activation</h3>
+<p>Press <kbd>W</kbd> or click <strong>Wall</strong> in the BUILD menu. A floating toolbar appears with draw/select toggle, editing tools, and confirm/cancel.</p>
+
+<h3>Drawing Workflow</h3>
+<ol class="steps">
+    <li>Click on the canvas to set the <strong>start point</strong>. The cursor snaps to grid points, wall endpoints, and midpoints.</li>
+    <li>Move the mouse — a live preview shows the wall outline with length and angle labels.</li>
+    <li>Click to set the <strong>end point</strong>. If Confirm Mode is enabled, a dialog appears.</li>
+    <li>In the dialog, fine-tune <strong>Length</strong> (mm), <strong>Angle</strong> (°), and <strong>Height</strong> (mm). Press <kbd>Tab</kbd> to cycle fields.</li>
+    <li>Press <kbd>Enter</kbd> or click ✓ to confirm the wall.</li>
+    <li>With <strong>Continuous Mode</strong> on, the next wall starts from the previous endpoint.</li>
+    <li>Press <kbd>Escape</kbd> to stop drawing.</li>
+</ol>
+
+<h3>CAD Input</h3>
+<p>While drawing, type precise values using CAD-style input:</p>
+<div class="shortcut-grid">
+    <kbd>L</kbd><span>Focus length input</span>
+    <kbd>A</kbd><span>Focus angle input</span>
+    <kbd>Tab</kbd><span>Switch between length / angle</span>
+    <kbd>Enter</kbd><span>Apply values and place wall</span>
+    <kbd>Shift</kbd>+<kbd>0</kbd>–<kbd>9</kbd><span>Quick angle presets (0°–180°)</span>
+</div>
+
+<h4>Quick Angle Presets</h4>
+<table>
+    <thead><tr><th>Key</th><th>Angle</th><th>Key</th><th>Angle</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>Shift</kbd>+<kbd>0</kbd></td><td>0°</td><td><kbd>Shift</kbd>+<kbd>5</kbd></td><td>75°</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>1</kbd></td><td>15°</td><td><kbd>Shift</kbd>+<kbd>6</kbd></td><td>90°</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>2</kbd></td><td>30°</td><td><kbd>Shift</kbd>+<kbd>7</kbd></td><td>120°</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>3</kbd></td><td>45°</td><td><kbd>Shift</kbd>+<kbd>8</kbd></td><td>135°</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>4</kbd></td><td>60°</td><td><kbd>Shift</kbd>+<kbd>9</kbd></td><td>180°</td></tr>
+    </tbody>
+</table>
+
+<h3>Wall Types</h3>
+<table>
+    <thead><tr><th>Type</th><th>Thickness</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><strong>Standard</strong></td><td>200 mm</td><td>Single-leaf masonry or blockwork. General-purpose internal or external wall.</td></tr>
+        <tr><td><strong>Load Bearing</strong></td><td>250 mm</td><td>Solid blockwork or concrete. Supports structural loads from floors and roof.</td></tr>
+        <tr><td><strong>Cavity Wall</strong></td><td>~252.5 mm</td><td>102.5 mm brick outer leaf + 50 mm cavity + 100 mm block inner leaf. External wall with insulation space. Leaf thicknesses and cavity width are adjustable.</td></tr>
+        <tr><td><strong>Partition</strong></td><td>100 mm</td><td>Lightweight internal division wall (e.g. plasterboard on C-stud frame).</td></tr>
+        <tr><td><strong>Stud Wall</strong></td><td>100 mm</td><td>Timber or metal stud framing. Suitable for internal partition or feature walls.</td></tr>
+    </tbody>
+</table>
+
+<h3>Wall Options Panel</h3>
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Thickness (mm)</td><td>Wall thickness — adjustable per wall</td></tr>
+        <tr><td>Height (mm)</td><td>Wall height (default: 2700 mm)</td></tr>
+        <tr><td>Level Preset</td><td>Ground, 1st, 2nd, 3rd, 4th Floor, Basement, or Custom</td></tr>
+        <tr><td>Base Elevation (mm)</td><td>Manual elevation offset</td></tr>
+        <tr><td>Finish</td><td>Brick, Concrete, Plaster, Stone, or Timber</td></tr>
+        <tr><td>Continuous Mode</td><td>Chain walls end-to-end automatically</td></tr>
+        <tr><td>Confirm Mode</td><td>Show confirmation dialog with exact dimensions</td></tr>
+    </tbody>
+</table>
+
+<h3>Wall Floating Toolbar</h3>
+<table>
+    <thead><tr><th>Button</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td>Select / Draw</td><td>Toggle between select (<kbd>S</kbd>) and draw (<kbd>W</kbd>) modes</td></tr>
+        <tr><td>Edit</td><td>Select a wall to modify its properties</td></tr>
+        <tr><td>Delete</td><td>Remove selected wall</td></tr>
+        <tr><td>Undo / Redo</td><td>Undo/redo wall creation</td></tr>
+        <tr><td>Split Wall</td><td>Split a wall at a click point</td></tr>
+        <tr><td>Join Walls</td><td>Merge two collinear segments</td></tr>
+        <tr><td>Extend Wall</td><td>Extend wall to meet another</td></tr>
+        <tr><td>Trim Wall</td><td>Trim wall at intersection</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="curved-walls">Curved Walls</h2>
+
+<p>Curved walls create arc-shaped wall segments. Click <strong>Curved Wall</strong> in the BUILD menu to activate.</p>
+
+<h3>How to Draw</h3>
+<ol class="steps">
+    <li>Click to set the wall's <strong>start point</strong>.</li>
+    <li>Move and click to set the <strong>end point</strong>. A straight wall preview appears.</li>
+    <li>After placement, a green <strong>bend handle</strong> appears at the midpoint.</li>
+    <li>Drag the bend handle perpendicular to the wall to create an arc. Drag left or right to curve in either direction.</li>
+    <li>Release to set the curvature. The wall updates in both 2D (curved outline with hatching) and 3D (extruded curved mesh).</li>
+</ol>
+
+<div class="callout tip">
+    <div class="callout-label">Tip</div>
+    Curved walls use 32-segment arcs for smooth geometry. All wall types (Standard, Load Bearing, Cavity, Partition) support curving.
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="doors-windows">Doors &amp; Windows</h2>
+
+<h3>Placing a Door</h3>
+<ol class="steps">
+    <li>Press <kbd>Shift</kbd>+<kbd>D</kbd> or click <strong>Door</strong> in BUILD → Openings.</li>
+    <li>Hover over an existing wall — the opening preview follows the cursor along the wall.</li>
+    <li>Click to place the door. It is automatically cut into the wall.</li>
+</ol>
+
+<h3>Placing a Window</h3>
+<ol class="steps">
+    <li>Press <kbd>Shift</kbd>+<kbd>W</kbd> or click <strong>Window</strong> in BUILD → Openings.</li>
+    <li>Hover over a wall to see the window preview.</li>
+    <li>Click to place the window.</li>
+</ol>
+
+<h3>Opening Frame</h3>
+<p>Press <kbd>O</kbd> to place a raw opening/frame — a cutout without a door or window insert. Press <kbd>O</kbd> again to cycle between Door, Window, and Frame types.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="floors-ceilings">Floors &amp; Ceilings</h2>
+
+<h3>Floor</h3>
+<ol class="steps">
+    <li>Click <strong>Floor</strong> in the BUILD menu.</li>
+    <li>Click to place corner points defining the floor boundary.</li>
+    <li>Press <kbd>Enter</kbd> to confirm and create the floor slab.</li>
+</ol>
+
+<h3>Ceiling</h3>
+<p>Works identically to Floor — click <strong>Ceiling</strong> and define boundary points. The ceiling is placed at wall-top height.</p>
+
+<h3>Floor Options</h3>
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Material</td><td>Wood Planks, Ceramic Tile, Marble, Concrete, Carpet, Laminate, Vinyl, Natural Stone</td></tr>
+        <tr><td>Thickness</td><td>Floor slab thickness (mm)</td></tr>
+        <tr><td>Level / Height</td><td>Elevation placement</td></tr>
+        <tr><td>Direction</td><td>Plank / tile direction</td></tr>
+        <tr><td>Plank Width / Length</td><td>Individual plank dimensions</td></tr>
+        <tr><td>Staggered</td><td>Toggle staggered pattern</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="roofs">Roofs</h2>
+
+<ol class="steps">
+    <li>Press <kbd>Shift</kbd>+<kbd>R</kbd> or click <strong>Roof</strong> in BUILD.</li>
+    <li>Click to define the roof boundary polygon.</li>
+    <li>Define the ridge line by clicking ridge points.</li>
+    <li>Drag corners or ridge points to adjust shape, pitch, and overhang.</li>
+</ol>
+
+<h3>Roof Options</h3>
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Type</td><td>Gable, Flat, or Shed</td></tr>
+        <tr><td>Building Shape</td><td>Rectangle, L-Shape, U-Shape, T-Shape</td></tr>
+        <tr><td>Pitch (°)</td><td>Roof pitch angle</td></tr>
+        <tr><td>Overhang (mm)</td><td>Eave overhang distance</td></tr>
+        <tr><td>Thickness (mm)</td><td>Roof slab thickness</td></tr>
+        <tr><td>Material</td><td>Clay Tiles, Asphalt Shingles, Metal, Slate, Concrete, Thatch, Green Roof</td></tr>
+        <tr><td>Fascia / Gutter</td><td>Toggle fascia board and gutter</td></tr>
+        <tr><td>Ridge Direction</td><td>Direction of the ridge line</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="stairs">Staircases</h2>
+
+<p>Press <kbd>Shift</kbd>+<kbd>S</kbd> or click <strong>Stairs</strong> in BUILD.</p>
+
+<h3>Staircase Types</h3>
+<table>
+    <thead><tr><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><strong>Straight</strong></td><td>Single-flight straight staircase</td></tr>
+        <tr><td><strong>L-Shaped</strong></td><td>Quarter-turn staircase with landing</td></tr>
+        <tr><td><strong>U-Shaped</strong></td><td>Half-turn staircase with intermediate landing</td></tr>
+        <tr><td><strong>Spiral</strong></td><td>Helical spiral staircase around a central column</td></tr>
+    </tbody>
+</table>
+
+<h3>Options</h3>
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Width (mm)</td><td>Staircase width</td></tr>
+        <tr><td>Total Rise (mm)</td><td>Total height covered</td></tr>
+        <tr><td>Tread Depth (mm)</td><td>Depth of each step</td></tr>
+        <tr><td>Riser Height (mm)</td><td>Height of each riser</td></tr>
+        <tr><td>Railing</td><td>Toggle railing on/off</td></tr>
+        <tr><td>Level Preset</td><td>Ground, 1st, 2nd, etc.</td></tr>
+        <tr><td>Base Elevation (mm)</td><td>Custom vertical offset</td></tr>
+    </tbody>
+</table>
+
+<p>Click canvas to place. Press <kbd>F</kbd> to flip direction after placement.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="columns">Columns</h2>
+
+<p>Press <kbd>Shift</kbd>+<kbd>C</kbd> or click <strong>Column</strong> in BUILD. Click canvas to place.</p>
+
+<table>
+    <thead><tr><th>Option</th><th>Values</th></tr></thead>
+    <tbody>
+        <tr><td>Shape</td><td>Square, Rectangular, Circular, H-Section</td></tr>
+        <tr><td>Width / Depth / Height</td><td>Dimensions in mm</td></tr>
+        <tr><td>Material</td><td>Concrete, Steel, Timber, Stone</td></tr>
+        <tr><td>Rotation</td><td>Rotation angle (°)</td></tr>
+        <tr><td>Wall Align</td><td>Snap to wall centreline</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="beams">Beams</h2>
+
+<p>Press <kbd>Shift</kbd>+<kbd>B</kbd> or click <strong>Beam</strong> in BUILD. Draw between two points (similar to walls).</p>
+
+<table>
+    <thead><tr><th>Option</th><th>Values</th></tr></thead>
+    <tbody>
+        <tr><td>Width / Depth (mm)</td><td>Beam cross-section</td></tr>
+        <tr><td>Elevation (mm)</td><td>Vertical placement</td></tr>
+        <tr><td>Material</td><td>Steel, Concrete, Timber</td></tr>
+        <tr><td>Rotation</td><td>Rotation angle</td></tr>
+        <tr><td>Wall Align</td><td>Snap to wall centreline</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="foundations">Foundations</h2>
+
+<p>Press <kbd>Shift</kbd>+<kbd>F</kbd> or click <strong>Foundation</strong> in BUILD. Draw between two points.</p>
+
+<table>
+    <thead><tr><th>Option</th><th>Values</th></tr></thead>
+    <tbody>
+        <tr><td>Type</td><td>Strip, Raft, Pad</td></tr>
+        <tr><td>Width / Depth (mm)</td><td>Foundation dimensions</td></tr>
+        <tr><td>Top Level (mm)</td><td>Top surface elevation</td></tr>
+        <tr><td>Material</td><td>Reinforced Concrete, Masonry, Stone</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="topography">Topography</h2>
+
+<p>Click <strong>Topography</strong> in BUILD → Surface. Creates a terrain surface that can be sculpted by adjusting point elevations.</p>
+
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Width / Length (mm)</td><td>Terrain dimensions</td></tr>
+        <tr><td>Height (mm)</td><td>Overall terrain height</td></tr>
+        <tr><td>Material</td><td>Concrete, Wood, Steel, Glass, Stone, Ceramic Tile, Grass, Soil/Earth</td></tr>
+        <tr><td>Colour</td><td>Custom colour picker</td></tr>
+        <tr><td>Point XYZ</td><td>Edit individual point coordinates for sculpting</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="drawing-tools">2D Drawing Tools</h2>
+
+<h3>Lines</h3>
+<table>
+    <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Line</td><td>Straight line between two points</td></tr>
+        <tr><td>Curve</td><td>Curved / Bézier line</td></tr>
+        <tr><td>Polyline</td><td>Multi-segment connected line — double-click to finish</td></tr>
+        <tr><td>Spline</td><td>Smooth curve through control points</td></tr>
+        <tr><td>Construction</td><td>Dashed reference line (non-printing)</td></tr>
+    </tbody>
+</table>
+
+<h3>Basic Shapes</h3>
+<table>
+    <thead><tr><th>Shape</th><th>Shape</th><th>Shape</th></tr></thead>
+    <tbody>
+        <tr><td>Rectangle</td><td>Circle</td><td>Ellipse</td></tr>
+        <tr><td>Arc</td><td>Diamond</td><td>Polygon</td></tr>
+        <tr><td>Triangle</td><td>Rounded Rect</td><td>Star</td></tr>
+        <tr><td>Hexagon</td><td>Trapezoid</td><td></td></tr>
+    </tbody>
+</table>
+
+<h3>Arrows &amp; Symbols</h3>
+<table>
+    <thead><tr><th>Symbol</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Arrow / Double Arrow</td><td>Single or bi-directional arrows</td></tr>
+        <tr><td>Cross / X Mark</td><td>Cross and X markers</td></tr>
+        <tr><td>North Arrow</td><td>Architectural north indicator</td></tr>
+        <tr><td>Section Mark</td><td>Section cut circle</td></tr>
+        <tr><td>Level Mark</td><td>Elevation symbol</td></tr>
+        <tr><td>Revision Cloud</td><td>Revision markup bubble</td></tr>
+        <tr><td>Callout</td><td>Speech / callout bubble</td></tr>
+    </tbody>
+</table>
+
+<h3>Drawing Options</h3>
+<table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Continuous</td><td>Chain strokes end-to-end</td></tr>
+        <tr><td>Colour / Fill</td><td>Stroke and fill colours + opacity</td></tr>
+        <tr><td>Weight</td><td>Line width 1–6 px</td></tr>
+        <tr><td>Style</td><td>Solid, Dashed, Dotted, Dash-Dot</td></tr>
+        <tr><td>Polygon Sides</td><td>3–12 sides for polygon shape</td></tr>
+        <tr><td>Arrow Head / Tail</td><td>Arrowhead style and size</td></tr>
+        <tr><td>Snap</td><td>Toggle snap and grid snap spacing (50–1000 mm)</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="shapes-3d">3D Shapes</h2>
+
+<p>Click any shape from the SHAPES menu, then click on the canvas to place it.</p>
+
+<table>
+    <thead><tr><th>Shape</th><th>Shape</th><th>Shape</th></tr></thead>
+    <tbody>
+        <tr><td>Box</td><td>Cylinder</td><td>Sphere</td></tr>
+        <tr><td>Hemisphere</td><td>Cone</td><td>Pyramid</td></tr>
+        <tr><td>Hex Prism</td><td>Tri Prism</td><td>Torus</td></tr>
+        <tr><td>Capsule</td><td>Plane</td><td></td></tr>
+    </tbody>
+</table>
+
+<p>After placement, use the Properties panel (<kbd>Space</kbd>) to adjust dimensions, position, rotation, material, and colour.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="view-modes">2D / 3D View Modes</h2>
+
+<h3>2D Mode</h3>
+<ul>
+    <li>Orthographic top-down camera — plan view</li>
+    <li>Wall outlines with hatching for type identification</li>
+    <li>Automatic dimension labels on walls</li>
+    <li>Rulers on top and left edges</li>
+    <li>Grid visible, no skybox or shadows</li>
+</ul>
+
+<h3>3D Mode</h3>
+<ul>
+    <li>ArcRotate perspective camera with orbit, pan, zoom</li>
+    <li>Skybox, environment lighting, shadows</li>
+    <li>Materials and textures visible</li>
+    <li>Transform gizmos for move/rotate/scale</li>
+</ul>
+
+<h3>Switching</h3>
+<table>
+    <thead><tr><th>Method</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>Tab</kbd></td><td>Toggle 2D ↔ 3D</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>2</kbd></td><td>Force 2D mode</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>3</kbd></td><td>Force 3D mode</td></tr>
+        <tr><td>Toolbar</td><td>Click "2D" or "3D" on the floating toolbar</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="camera">Camera Controls</h2>
+
+<h3>3D Mode</h3>
+<table>
+    <thead><tr><th>Action</th><th>Control</th></tr></thead>
+    <tbody>
+        <tr><td>Orbit</td><td>Left-click + drag</td></tr>
+        <tr><td>Pan</td><td>Right-click + drag / Middle-click + drag</td></tr>
+        <tr><td>Zoom</td><td>Mouse scroll wheel</td></tr>
+        <tr><td>Fit Selection</td><td><kbd>F</kbd></td></tr>
+    </tbody>
+</table>
+
+<h3>2D Mode</h3>
+<table>
+    <thead><tr><th>Action</th><th>Control</th></tr></thead>
+    <tbody>
+        <tr><td>Pan</td><td>Arrow keys / Right-click + drag</td></tr>
+        <tr><td>Zoom</td><td>Scroll wheel / +/- buttons</td></tr>
+    </tbody>
+</table>
+
+<h3>Preset Views (3D Mode)</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>View</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>Alt</kbd>+<kbd>1</kbd></td><td>Front elevation</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>3</kbd></td><td>Right side elevation</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>7</kbd></td><td>Top / plan view</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>5</kbd></td><td>Toggle orthographic camera</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="view-cube">View Cube</h2>
+
+<p>Open the VIEWS panel to access the interactive 3D view cube. Click any face (Top, Front, Back, Left, Right, Bottom) or corner (NW, NE, SW, SE) to snap to that viewpoint. Navigation arrows rotate the camera incrementally.</p>
+
+<h3>Capture Tools</h3>
+<table>
+    <thead><tr><th>Button</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td>Capture Plan</td><td>Capture 2D floor plan as image</td></tr>
+        <tr><td>Capture All</td><td>Capture all elevation + isometric views</td></tr>
+        <tr><td>Capture Current</td><td>Screenshot of current viewport</td></tr>
+    </tbody>
+</table>
+
+<p>Camera settings: Distance, View Height (mm), and Zoom level.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="selection">Selection</h2>
+
+<table>
+    <thead><tr><th>Action</th><th>Method</th></tr></thead>
+    <tbody>
+        <tr><td>Select</td><td>Click on any object</td></tr>
+        <tr><td>Add to selection</td><td><kbd>Shift</kbd>+Click</td></tr>
+        <tr><td>Select all</td><td><kbd>Ctrl</kbd>+<kbd>A</kbd></td></tr>
+        <tr><td>Deselect</td><td><kbd>Escape</kbd></td></tr>
+        <tr><td>Properties</td><td><kbd>Space</kbd> or double-click</td></tr>
+        <tr><td>Copy / Paste</td><td><kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td></tr>
+        <tr><td>Duplicate</td><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td></tr>
+        <tr><td>Delete</td><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td></tr>
+    </tbody>
+</table>
+
+<h3>Multi-Selection</h3>
+<p>With multiple walls selected (<kbd>Shift</kbd>+Click), the properties panel shows: total wall count, combined length, combined surface area, and average length.</p>
+
+<h3>Context Menu</h3>
+<p>Right-click a selected element for: Edit Properties, Duplicate, Isolate, Change Material, Divide Walls at Intersections, and Delete.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="transform">Transform Tools</h2>
+
+<table>
+    <thead><tr><th>Tool</th><th>Key</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td><strong>Move</strong></td><td><kbd>V</kbd></td><td>Drag arrows to move along X, Y, or Z</td></tr>
+        <tr><td><strong>Rotate</strong></td><td><kbd>Q</kbd></td><td>Drag rings to rotate around axes</td></tr>
+        <tr><td><strong>Scale</strong></td><td><kbd>E</kbd></td><td>Drag handles to resize</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="properties">Properties Panel</h2>
+
+<p>Select any element and press <kbd>Space</kbd> (or right-click → Edit Properties) to open the Properties panel.</p>
+
+<h3>Wall Properties</h3>
+<ul>
+    <li>Wall type, Length, Height, Thickness, Angle</li>
+    <li>Start / End point coordinates</li>
+    <li>Base elevation, Level name</li>
+    <li>Material: Red Brick, Beige Brick, White Brick, Grey Brick, Concrete, Plaster, Stone, Wood Panels</li>
+    <li>Randomise / Reset Material buttons</li>
+</ul>
+
+<h3>Door / Window Properties</h3>
+<ul>
+    <li>Width, Height, Position offset along wall</li>
+    <li>Sill height (windows), Swing direction (doors)</li>
+</ul>
+
+<h3>Other Elements</h3>
+<p>Floor, Ceiling, Roof, Staircase, Beam, Foundation, Column, and 3D shapes each display their relevant dimensions, material, position, and rotation fields.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="layers">Layers</h2>
+
+<p>Layers organise building elements into groups that can be shown, hidden, or locked independently.</p>
+
+<h3>Default Layers</h3>
+<table>
+    <thead><tr><th>Layer</th><th>Colour</th></tr></thead>
+    <tbody>
+        <tr><td>Layer 0 (Default)</td><td><span class="swatch-blue">■</span> Blue</td></tr>
+        <tr><td>Layer 1</td><td><span class="swatch-green">■</span> Green</td></tr>
+        <tr><td>Layer 2</td><td><span class="swatch-amber">■</span> Amber</td></tr>
+        <tr><td>Layer 3</td><td><span class="swatch-red">■</span> Red</td></tr>
+    </tbody>
+</table>
+
+<h3>Layer Operations</h3>
+<table>
+    <thead><tr><th>Operation</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Add Layer</td><td>Create new layer with auto colour</td></tr>
+        <tr><td>Delete Layer</td><td>Remove layer — objects move to Default. Cannot delete Default or last layer.</td></tr>
+        <tr><td>Rename</td><td>Rename via prompt dialog</td></tr>
+        <tr><td>Toggle Visibility</td><td>Show/hide all objects on layer</td></tr>
+        <tr><td>Toggle Lock</td><td>Lock layer to prevent editing</td></tr>
+        <tr><td>Set Active</td><td>New objects placed on active layer</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="undo-redo">Undo / Redo</h2>
+
+<table>
+    <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+    <tbody>
+        <tr><td>Undo</td><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td></tr>
+        <tr><td>Redo</td><td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td></tr>
+    </tbody>
+</table>
+
+<ul>
+    <li>Maximum <strong>100 history entries</strong></li>
+    <li>Tracks create, delete, and modify actions</li>
+    <li>During wall drawing, <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd> undoes/redoes pending wall segments</li>
+</ul>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="measurements">Measurements</h2>
+
+<h3>Automatic Wall Dimensions</h3>
+<p>In 2D mode, dimension lines auto-display on walls. Toggle with <kbd>D</kbd>.</p>
+
+<h3>Area Measurement</h3>
+<ol class="steps">
+    <li>Open MEASURE menu → click <strong>Area</strong>.</li>
+    <li>Click corner points to define a polygon.</li>
+    <li>With 3+ points, press <kbd>Enter</kbd> to calculate and display the area.</li>
+</ol>
+
+<h3>Dimension Settings</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Dim Offset</td><td>Distance from wall to dimension line (default: 200 mm)</td></tr>
+        <tr><td>Tick Length</td><td>Dimension tick size (default: 120 mm)</td></tr>
+        <tr><td>Preview Labels</td><td>Live labels during wall drawing</td></tr>
+        <tr><td>Preview Leaders</td><td>Leader lines on dimensions</td></tr>
+        <tr><td>Compact Preview</td><td>Compact labels for walls &lt; 500 mm</td></tr>
+        <tr><td>Snap to Walls</td><td>Snap measurement points to geometry</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="annotations">Annotations</h2>
+
+<table>
+    <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Text</td><td>Text annotation with font, size, bold/italic, colour</td></tr>
+        <tr><td>Dimension</td><td>Manual dimension line between two points</td></tr>
+        <tr><td>Angle</td><td>Angle measurement between three points</td></tr>
+        <tr><td>Leader</td><td>Leader line with callout label</td></tr>
+        <tr><td>Curved Leader</td><td>Curved leader with arrowhead</td></tr>
+        <tr><td>Bubble</td><td>Numbered room / detail circle</td></tr>
+        <tr><td>Callout</td><td>Speech bubble annotation</td></tr>
+        <tr><td>Revision Cloud</td><td>Revision markup shape</td></tr>
+        <tr><td>Arrow</td><td>Directional arrow</td></tr>
+        <tr><td>North Arrow</td><td>Architectural north symbol</td></tr>
+        <tr><td>Section Mark</td><td>Section cut indicator</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="save-load">Save &amp; Load</h2>
+
+<h3>Saving</h3>
+<table>
+    <thead><tr><th>Action</th><th>Shortcut</th></tr></thead>
+    <tbody>
+        <tr><td>Save to database</td><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td></tr>
+        <tr><td>Save to disk (.json)</td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td></tr>
+        <tr><td>New project</td><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td></tr>
+    </tbody>
+</table>
+
+<h3>Project Database</h3>
+<p>Open with <kbd>Ctrl</kbd>+<kbd>O</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>. Lists all saved projects with thumbnails. Save with project name, type, and company. Load, duplicate, or delete projects. Primary: IndexedDB, fallback: localStorage.</p>
+
+<h3>Auto-Save</h3>
+<ul>
+    <li>Enabled by default — every <strong>5 minutes</strong></li>
+    <li>Interval configurable (1–30 min) in Settings</li>
+    <li>Quota exceeded → 50% oldest saves auto-cleared</li>
+</ul>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="export">Export (PDF / DXF / 3D)</h2>
+
+<p>Access via <strong>Share &amp; Export</strong> dropdown or <kbd>Ctrl</kbd>+<kbd>E</kbd>.</p>
+
+<h3>PDF Export</h3>
+<table>
+    <thead><tr><th>Section</th><th>Options</th></tr></thead>
+    <tbody>
+        <tr><td>Title Block</td><td>Project Name, Type, Drawn By, Checked By, Company, Address, Project Number, Revision</td></tr>
+        <tr><td>Plan Views</td><td>Floor Plan, Elevation Views, Section Views, 3D Isometric</td></tr>
+        <tr><td>Page Settings</td><td>Paper: A3 / A2 / A1 — Scale: 1:50 / 1:100 / 1:200 / Fit</td></tr>
+        <tr><td>Include</td><td>Dimensions, Grid, Annotations</td></tr>
+    </tbody>
+</table>
+
+<h3>DXF / CAD Export</h3>
+<p>AutoCAD-compatible DXF format for use in other CAD software.</p>
+
+<h3>3D Model Export</h3>
+<p>OBJ or GLB files for rendering, visualisation, or BIM workflows.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="multi-story">Multi-Story Levels</h2>
+
+<p>Walls and staircases support level-based placement for multi-story buildings.</p>
+
+<table>
+    <thead><tr><th>Level</th><th>Elevation</th></tr></thead>
+    <tbody>
+        <tr><td>Basement</td><td>-2,700 mm</td></tr>
+        <tr><td>Ground Floor</td><td>0 mm</td></tr>
+        <tr><td>1st Floor</td><td>2,700 mm</td></tr>
+        <tr><td>2nd Floor</td><td>5,400 mm</td></tr>
+        <tr><td>3rd Floor</td><td>8,100 mm</td></tr>
+        <tr><td>4th Floor</td><td>10,800 mm</td></tr>
+        <tr><td>Custom</td><td>User-defined</td></tr>
+    </tbody>
+</table>
+
+<ol class="steps">
+    <li>Select <strong>Level Preset</strong> in Wall or Stairs options.</li>
+    <li>Choose a floor — elevation is set automatically.</li>
+    <li>For custom, type elevation in mm (-5,000 to 50,000).</li>
+    <li>Draw walls or place stairs at that elevation.</li>
+    <li>Switch to 3D (<kbd>Tab</kbd>) to see all levels stacked.</li>
+</ol>
+
+<div class="callout tip">
+    <div class="callout-label">Tip</div>
+    Default floor-to-floor height is 2,700 mm (2.7 m) — standard UK/EU residential storey height.
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="materials">Materials</h2>
+
+<h3>Wall Materials</h3>
+<p>Red Brick, Beige Brick, White Brick, Grey Brick, Concrete, Plaster, Stone, Wood Panels</p>
+
+<h3>Surface Materials (Topography)</h3>
+<p>Concrete, Wood, Steel, Glass, Stone, Ceramic Tile, Grass, Soil/Earth</p>
+
+<h3>Material Tools</h3>
+<table>
+    <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Material Library</td><td>Browse available materials</td></tr>
+        <tr><td>Paint Tool</td><td>Click to apply material</td></tr>
+        <tr><td>Texture Editor</td><td>Edit texture properties</td></tr>
+        <tr><td>Randomise</td><td>Apply random diffuse colour</td></tr>
+        <tr><td>Reset</td><td>Restore default material</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="grid-snap">Grid &amp; Snapping</h2>
+
+<h3>Grid</h3>
+<ul>
+    <li><kbd>G</kbd> to toggle grid visibility</li>
+    <li>Grid shown in both 2D and 3D modes</li>
+    <li>Spacing configurable in Settings</li>
+</ul>
+
+<h3>Snap Targets</h3>
+<ul>
+    <li>Grid intersections</li>
+    <li>Wall endpoints and midpoints</li>
+    <li>T-junction intersection points</li>
+    <li>Perpendicular snap</li>
+</ul>
+
+<p><strong>Snap Tolerance:</strong> 100–2,000 mm (default 500 mm). A dark green disc appears at valid snap points.</p>
+
+<h3>Ortho Mode</h3>
+<p>Toggle in Settings → Drawing. Constrains to 0°/90°/180°/270°. Hold <kbd>Shift</kbd> for temporary orthogonal constraint.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="settings">Settings</h2>
+
+<p>Open via the gear icon in the header bar.</p>
+
+<h3>General</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Default</th><th>Range</th></tr></thead>
+    <tbody>
+        <tr><td>Snap Tolerance</td><td>500 mm</td><td>100–2,000 mm</td></tr>
+        <tr><td>Default Wall Height</td><td>2,700 mm</td><td>1,000–10,000 mm</td></tr>
+        <tr><td>Default Wall Thickness</td><td>200 mm</td><td>50–1,000 mm</td></tr>
+    </tbody>
+</table>
+
+<h3>Display</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+    <tbody>
+        <tr><td>UI Theme</td><td>Dark / Light</td></tr>
+        <tr><td>Render Quality</td><td>Low / Medium / High / Ultra</td></tr>
+        <tr><td>3D Sky Colour</td><td>#1a263f (colour picker)</td></tr>
+        <tr><td>Show Grid</td><td>ON</td></tr>
+        <tr><td>Show Labels</td><td>ON</td></tr>
+    </tbody>
+</table>
+
+<h3>Drawing</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+    <tbody>
+        <tr><td>Ortho Mode</td><td>OFF</td></tr>
+        <tr><td>Continuous Walls</td><td>ON</td></tr>
+        <tr><td>Snap to Grid</td><td>ON</td></tr>
+    </tbody>
+</table>
+
+<h3>Lighting &amp; Environment</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Enhanced Lighting</td><td>Higher quality lighting calculations</td></tr>
+        <tr><td>Lighting Setup</td><td>Direction, intensity, colour</td></tr>
+        <tr><td>Environment</td><td>Skybox, fog, ambient</td></tr>
+    </tbody>
+</table>
+
+<h3>Auto-Save</h3>
+<table>
+    <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+    <tbody>
+        <tr><td>Enabled</td><td>ON</td></tr>
+        <tr><td>Interval</td><td>5 min (1–30 min)</td></tr>
+    </tbody>
+</table>
+
+<h3>Actions</h3>
+<table>
+    <thead><tr><th>Button</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Reset to Defaults</td><td>Restore all factory settings</td></tr>
+        <tr><td>Apply &amp; Close</td><td>Save and close settings</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="analysis">Analysis Tools</h2>
+
+<p>Open the ANALYZE menu from the left sidebar.</p>
+
+<table>
+    <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+    <tbody>
+        <tr><td>Compliance</td><td>Check building against regulations and codes</td></tr>
+        <tr><td>Energy</td><td>Energy performance and efficiency ratings</td></tr>
+        <tr><td>Structural</td><td>Structural integrity and load analysis</td></tr>
+        <tr><td>Report</td><td>Generate comprehensive building analysis report</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="shortcuts">Keyboard Shortcuts — Complete Reference</h2>
+
+<h3>Building Tools</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>W</kbd></td><td>Wall drawing mode</td></tr>
+        <tr><td><kbd>S</kbd></td><td>Wall select mode</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>D</kbd></td><td>Place Door</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>W</kbd></td><td>Place Window</td></tr>
+        <tr><td><kbd>O</kbd></td><td>Place Opening / Cycle type</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>R</kbd></td><td>Roof tool</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>S</kbd></td><td>Stairs tool</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>B</kbd></td><td>Beam tool</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>F</kbd></td><td>Foundation tool</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>C</kbd></td><td>Column tool</td></tr>
+    </tbody>
+</table>
+
+<h3>View &amp; Display</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>Tab</kbd></td><td>Toggle 2D / 3D</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>1</kbd></td><td>Front elevation view</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>3</kbd></td><td>Right side elevation view</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>7</kbd></td><td>Top / plan view</td></tr>
+        <tr><td><kbd>Alt</kbd>+<kbd>5</kbd></td><td>Toggle orthographic camera</td></tr>
+        <tr><td><kbd>G</kbd></td><td>Toggle grid</td></tr>
+        <tr><td><kbd>D</kbd></td><td>Toggle dimensions</td></tr>
+        <tr><td><kbd>Z</kbd></td><td>Toggle wireframe</td></tr>
+        <tr><td><kbd>X</kbd></td><td>Toggle X-Ray</td></tr>
+        <tr><td><kbd>P</kbd></td><td>Toggle performance stats</td></tr>
+        <tr><td><kbd>K</kbd></td><td>Toggle lighting quality (Low / High)</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>1</kbd></td><td>Render quality: Low</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>2</kbd></td><td>Render quality: Medium</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>3</kbd></td><td>Render quality: High</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>4</kbd></td><td>Render quality: Ultra</td></tr>
+        <tr><td><kbd>L</kbd></td><td>Open lighting setup dialog (not while drawing walls)</td></tr>
+        <tr><td>Arrow keys</td><td>Pan camera</td></tr>
+    </tbody>
+</table>
+
+<h3>Editing</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>V</kbd></td><td>Move tool</td></tr>
+        <tr><td><kbd>Q</kbd></td><td>Rotate tool</td></tr>
+        <tr><td><kbd>E</kbd></td><td>Scale tool</td></tr>
+        <tr><td><kbd>F</kbd></td><td>Fit selection to view (3D) / Flip staircase (during stair placement)</td></tr>
+        <tr><td><kbd>Delete</kbd></td><td>Delete selected</td></tr>
+        <tr><td><kbd>Escape</kbd></td><td>Cancel / close / deselect</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>Open properties</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Confirm operation</td></tr>
+    </tbody>
+</table>
+
+<h3>File Operations</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save to database</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>Save to disk</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Open project database</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>New project</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Undo</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td>Redo</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Copy</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Paste</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Duplicate</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd></td><td>Select all</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>Export model</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>Screenshot</td></tr>
+    </tbody>
+</table>
+
+<h3>CAD Input (Wall Drawing)</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>L</kbd></td><td>Focus length input</td></tr>
+        <tr><td><kbd>A</kbd></td><td>Focus angle input</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>Cycle length / angle</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Apply and place</td></tr>
+        <tr><td><kbd>Shift</kbd>+<kbd>0</kbd>–<kbd>9</kbd></td><td>Angle presets (0°–180°)</td></tr>
+    </tbody>
+</table>
+
+
+
+<h3>Miscellaneous</h3>
+<table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+        <tr><td><kbd>H</kbd></td><td>Help &amp; Shortcuts dialog</td></tr>
+        <tr><td><kbd>F11</kbd></td><td>Toggle fullscreen</td></tr>
+        <tr><td>Hold <kbd>Shift</kbd></td><td>Orthogonal constraint while drawing walls</td></tr>
+        <tr><td><kbd>R</kbd></td><td>Open rotation input (during stair placement)</td></tr>
+        <tr><td><kbd>F</kbd></td><td>Flip staircase direction (during stair placement)</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Open project database</td></tr>
+    </tbody>
+</table>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<h2 id="faq">Frequently Asked Questions</h2>
+
+<h3>How do I draw a room quickly?</h3>
+<p>Press <kbd>W</kbd>, click four corners to make a rectangle, then press <kbd>Escape</kbd>. Make sure <strong>Continuous Mode</strong> is on (default) so walls chain automatically.</p>
+
+<h3>How do I switch between 2D and 3D?</h3>
+<p>Press <kbd>Tab</kbd> to toggle, or click the "2D" / "3D" buttons on the floating toolbar.</p>
+
+<h3>How do I add a door or window to a wall?</h3>
+<p>Press <kbd>Shift</kbd>+<kbd>D</kbd> for door or <kbd>Shift</kbd>+<kbd>W</kbd> for window. Hover over any existing wall and click to place.</p>
+
+<h3>How do I change a wall's material?</h3>
+<p>Click the wall to select it, press <kbd>Space</kbd> to open properties, then choose from the Material dropdown (Red Brick, Concrete, Plaster, etc.).</p>
+
+<h3>How do I create a curved wall?</h3>
+<p>Click <strong>Curved Wall</strong> in the BUILD menu, draw a straight wall, then drag the green bend handle at the midpoint to curve it.</p>
+
+<h3>How do I design a multi-story building?</h3>
+<p>In the Wall or Stairs options panel, select a <strong>Level Preset</strong> (Ground, 1st, 2nd, etc.). Draw walls at each level, then switch to 3D to see them stacked.</p>
+
+<h3>How do I export to PDF?</h3>
+<p>Click <strong>Share &amp; Export</strong> in the header → PDF Export. Configure title block, select plan views, choose paper size and scale, then export.</p>
+
+<h3>Where are my projects saved?</h3>
+<p>Projects are saved to your browser's <strong>IndexedDB</strong> storage (local to your machine). For portable backups, use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> to download a JSON file.</p>
+
+<h3>How do I undo a mistake?</h3>
+<p>Press <kbd>Ctrl</kbd>+<kbd>Z</kbd> to undo or <kbd>Ctrl</kbd>+<kbd>Y</kbd> to redo. Up to 100 history steps are stored.</p>
+
+<h3>Can I use precise measurements?</h3>
+<p>Yes — while drawing walls, press <kbd>L</kbd> to type an exact length and <kbd>A</kbd> for angle. Press <kbd>Enter</kbd> to apply.</p>
+
+<h3>How do I change the default wall height?</h3>
+<p>Open Settings (gear icon) → General → Default Wall Height. Change to your desired value in mm.</p>
+
+<h3>How do I create a roof?</h3>
+<p>Press <kbd>Shift</kbd>+<kbd>R</kbd>, click to define the roof boundary, then define the ridge line. Adjust pitch, overhang, and material in the options panel.</p>
+
+<h3>How do I measure a room's area?</h3>
+<p>Open MEASURE menu → Area. Click corner points of the boundary, then press <kbd>Enter</kbd>. The area is calculated and displayed.</p>
+
+<h3>How do I use layers?</h3>
+<p>Click the Layers button on the floating toolbar. Create layers, toggle visibility/lock, and set the active layer. New objects are placed on the active layer.</p>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<hr>
+
+<div class="callout">
+    <div class="callout-label">Version</div>
+    ARC3D™ v1.0 Beta — Help File<br>
+    Last updated: March 2026 — Roof rotation save/load corrected, wall type thicknesses corrected<br>
+    &copy; 2026 ARC3D™. All rights reserved. Built by HSAN studios.
+</div>
+
+</main>
+</div>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<div class="footer">
+    &copy; 2026 ARC3D™ &nbsp;|&nbsp; v1.0 Beta &nbsp;|&nbsp; Press <kbd>H</kbd> in-app for quick shortcuts
+</div>
+
+<!-- ──── Back to top ──── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
+
+<!-- ════════════════ SCRIPTS ════════════════ -->
+<script>
+    // ──── Active TOC highlight ────
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = [];
+    tocLinks.forEach(link => {
+        const id = link.getAttribute('href')?.slice(1);
+        if (id) {
+            const el = document.getElementById(id);
+            if (el) sections.push({ id, el, link });
+        }
+    });
+
+    function updateActiveToc() {
+        let current = sections[0];
+        const scrollY = window.scrollY + 80;
+        for (const s of sections) {
+            if (s.el.offsetTop <= scrollY) current = s;
+        }
+        tocLinks.forEach(l => l.classList.remove('active'));
+        if (current) current.link.classList.add('active');
+
+        // Back to top
+        const btn = document.getElementById('backToTop');
+        btn.classList.toggle('visible', window.scrollY > 400);
+    }
+
+    window.addEventListener('scroll', updateActiveToc, { passive: true });
+    updateActiveToc();
+
+    // ──── Search ────
+    const searchInput = document.getElementById('searchInput');
+    const searchCount = document.getElementById('searchCount');
+    const content = document.getElementById('content');
+    let searchTimeout;
+
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(performSearch, 250);
+    });
+
+    function performSearch() {
+        // Clear previous highlights
+        content.querySelectorAll('mark').forEach(m => {
+            const parent = m.parentNode;
+            parent.replaceChild(document.createTextNode(m.textContent), m);
+            parent.normalize();
+        });
+
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query || query.length < 2) {
+            searchCount.textContent = '';
+            return;
+        }
+
+        let count = 0;
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null, false);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escaped})`, 'gi');
+
+        for (const node of textNodes) {
+            if (node.parentElement?.tagName === 'SCRIPT' || node.parentElement?.tagName === 'STYLE') continue;
+            if (!regex.test(node.textContent)) continue;
+            regex.lastIndex = 0;
+
+            const frag = document.createDocumentFragment();
+            let lastIdx = 0;
+            let match;
+            while ((match = regex.exec(node.textContent)) !== null) {
+                if (match.index > lastIdx) {
+                    frag.appendChild(document.createTextNode(node.textContent.slice(lastIdx, match.index)));
+                }
+                const mark = document.createElement('mark');
+                mark.textContent = match[1];
+                frag.appendChild(mark);
+                count++;
+                lastIdx = regex.lastIndex;
+            }
+            if (lastIdx < node.textContent.length) {
+                frag.appendChild(document.createTextNode(node.textContent.slice(lastIdx)));
+            }
+            node.parentNode.replaceChild(frag, node);
+        }
+
+        searchCount.textContent = count > 0 ? `${count} found` : 'No results';
+
+        // Scroll to first match
+        const firstMark = content.querySelector('mark');
+        if (firstMark) {
+            firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // ──── Keyboard shortcut for search ────
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+            e.preventDefault();
+            searchInput.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+            searchInput.value = '';
+            performSearch();
+            searchInput.blur();
+        }
+    });
+</script>
+
+</body>
+</html>

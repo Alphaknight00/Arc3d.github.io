@@ -1,0 +1,34 @@
+# Virtual environments
+.venv/
+.venv-1/
+
+# Video files (too large for GitHub)
+*.mp4
+
+# Backups
+Backups/
+MasterBACKUP.zip
+
+# Extras / business docs
+Extras/
+
+# Temp files
+temp_check.js
+
+# Electron app build artifacts
+ARC3D-APP/node_modules/
+ARC3D-APP/dist/
+ARC3D-APP/build/
+
+# IDE
+.vscode/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Old branding assets
+Alpha-1.png
+Alpha-logo.png
+alpha-logo-b64.txt

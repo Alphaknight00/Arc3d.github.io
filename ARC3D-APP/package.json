@@ -1,0 +1,162 @@
+{
+  "name": "arc3d",
+  "version": "1.3.0",
+  "description": "ARC3D™ - Professional Architectural Design Software",
+  "main": "main.js",
+  "author": {
+    "name": "HSAN Studios",
+    "email": "support@HSAN-Studios.com"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://HSAN-Studios.com",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.arc3d.app",
+    "productName": "ARC3D™",
+    "copyright": "Copyright © 2026 ARC3D™. All rights reserved.",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "app/**/*",
+      "!app/**/*.map",
+      "node_modules/**/*",
+      "!node_modules/**/test/**",
+      "!node_modules/**/docs/**"
+    ],
+    "extraResources": [
+      {
+        "from": "build/",
+        "to": ".",
+        "filter": [
+          "icon.*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/knight(2)-1.ico",
+      "publisherName": "HSAN Studios",
+      "verifyUpdateCodeSignature": false,
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": "ARC3D™",
+      "shortcutName": "ARC3D™",
+      "uninstallDisplayName": "ARC3D™",
+      "license": "build/LICENSE.txt",
+      "installerIcon": "build/knight(2)-1.ico",
+      "uninstallerIcon": "build/knight(2)-1.ico",
+      "installerHeaderIcon": "build/knight(2)-1.ico",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "warningsAsErrors": false
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.graphics-design",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "build/icons",
+      "category": "Graphics",
+      "synopsis": "Professional Architectural CAD Software",
+      "description": "ARC3D is a professional architectural design and CAD application powered by BabylonJS.",
+      "desktop": {
+        "StartupWMClass": "arc3d"
+      }
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "https://updates.HSAN-Studios.com/releases/"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.7"
+  }
+}
