@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Protection &amp; GDPR — ARC3D™ | HSAN Studios</title>
+    <meta name="description" content="ARC3D™ Data Protection Policy compliant with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg:         #0a0a0f;
+            --surface:    #111118;
+            --surface-2:  #1a1a24;
+            --border:     rgba(255,255,255,0.06);
+            --text:       #e2e2e8;
+            --text-dim:   #8888a0;
+            --accent:     #6366f1;
+            --accent-glow: rgba(99,102,241,0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        /* ── Header ─────────────────────────────────────────── */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+        .header-inner {
+            max-width: 960px; margin: 0 auto; padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: #fff; text-decoration: none; }
+        .logo span { color: var(--accent); }
+        .back-link { color: var(--text-dim); text-decoration: none; font-size: 13px; transition: color .2s; }
+        .back-link:hover { color: #fff; }
+
+        /* ── Content ────────────────────────────────────────── */
+        main {
+            max-width: 960px; margin: 0 auto; padding: 48px 24px 80px;
+        }
+        h1 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 700; letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: var(--text-dim); font-size: 14px; margin-bottom: 32px;
+        }
+        .updated {
+            display: inline-block;
+            background: var(--accent-glow);
+            color: var(--accent);
+            font-size: 12px; font-weight: 600;
+            padding: 4px 12px;
+            border: 1px solid rgba(99,102,241,0.2);
+            margin-bottom: 40px;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px 28px;
+            margin-bottom: 48px;
+        }
+        .toc h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 20px; font-weight: 600; color: #fff;
+            margin-bottom: 16px; padding-top: 8px;
+        }
+        h2 .num { color: var(--accent); margin-right: 8px; }
+
+        h3.sub { font-size: 16px; font-weight: 600; color: #ccc; margin: 20px 0 10px; }
+
+        p { margin-bottom: 14px; }
+
+        ul, ol { margin: 12px 0 16px 24px; }
+        li { margin-bottom: 6px; }
+
+        strong { color: #fff; font-weight: 600; }
+
+        .highlight-box {
+            background: var(--surface-2);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%; border-collapse: collapse;
+            margin: 16px 0 20px; font-size: 14px;
+        }
+        th, td {
+            text-align: left; padding: 10px 14px;
+            border: 1px solid var(--border);
+        }
+        th { background: var(--surface); color: #fff; font-weight: 600; }
+        td { background: var(--surface-2); }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px; margin-top: 16px;
+        }
+        .contact-card p { margin-bottom: 6px; font-size: 14px; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            main { padding: 32px 16px 60px; }
+            h1 { font-size: 24px; }
+            table { font-size: 12px; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo">ARC<span>3D</span>™</a>
+        <a href="index.html" class="back-link">← Back to Homepage</a>
+    </div>
+</header>
+
+<main>
+    <h1>Data Protection &amp; GDPR Policy</h1>
+    <p class="subtitle">How HSAN Studios collects, processes, stores, and protects your personal data</p>
+    <span class="updated">Last updated: 7 April 2026</span>
+
+    <!-- TABLE OF CONTENTS -->
+    <nav class="toc">
+        <h3>Contents</h3>
+        <ol>
+            <li><a href="#s1">About This Policy</a></li>
+            <li><a href="#s2">Data Controller</a></li>
+            <li><a href="#s3">Lawful Basis for Processing</a></li>
+            <li><a href="#s4">Personal Data We Collect</a></li>
+            <li><a href="#s5">How We Use Your Data</a></li>
+            <li><a href="#s6">Data Storage &amp; Security</a></li>
+            <li><a href="#s7">Cloud Synchronisation</a></li>
+            <li><a href="#s8">Data Sharing &amp; Third Parties</a></li>
+            <li><a href="#s9">International Data Transfers</a></li>
+            <li><a href="#s10">Data Retention</a></li>
+            <li><a href="#s11">Your Rights Under UK GDPR</a></li>
+            <li><a href="#s12">Cookies &amp; Local Storage</a></li>
+            <li><a href="#s13">Children's Data</a></li>
+            <li><a href="#s14">Data Breach Procedures</a></li>
+            <li><a href="#s15">Changes to This Policy</a></li>
+            <li><a href="#s16">Complaints &amp; Contact</a></li>
+        </ol>
+    </nav>
+
+    <!-- ─── 1 ─────────────────────────────────────────────── -->
+    <div class="section" id="s1">
+        <h2><span class="num">1.</span> About This Policy</h2>
+        <p>This Data Protection Policy explains how <strong>HSAN Studios</strong> (trading as "HSAN Studios — a Private Limited Company") processes personal data in connection with the <strong>ARC3D™</strong> architectural design software and the website at <strong>hsan-studios.com</strong>.</p>
+        <p>This policy is written in accordance with:</p>
+        <ul>
+            <li>The <strong>UK General Data Protection Regulation</strong> (UK GDPR), retained from EU Regulation 2016/679</li>
+            <li>The <strong>Data Protection Act 2018</strong> (DPA 2018)</li>
+            <li>Guidance from the <strong>Information Commissioner's Office</strong> (ICO)</li>
+        </ul>
+        <p>By creating an account or using ARC3D™, you acknowledge that you have read and understood this policy.</p>
+    </div>
+
+    <!-- ─── 2 ─────────────────────────────────────────────── -->
+    <div class="section" id="s2">
+        <h2><span class="num">2.</span> Data Controller</h2>
+        <p>The data controller responsible for your personal data is:</p>
+        <div class="contact-card">
+            <p><strong>HSAN Studios</strong></p>
+            <p>45 Merefield Street, Rochdale, OL11 3RH</p>
+            <p>United Kingdom</p>
+            <p>Email: <strong>support@hsan-studios.com</strong></p>
+            <p>Website: <strong>hsan-studios.com</strong></p>
+        </div>
+        <p style="margin-top:14px;">If you have any questions about how your personal data is handled, please contact us at the above address.</p>
+    </div>
+
+    <!-- ─── 3 ─────────────────────────────────────────────── -->
+    <div class="section" id="s3">
+        <h2><span class="num">3.</span> Lawful Basis for Processing</h2>
+        <p>Under Article 6 of the UK GDPR, we process personal data on the following lawful bases:</p>
+        <table>
+            <thead>
+                <tr><th>Purpose</th><th>Lawful Basis</th><th>GDPR Article</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Account creation &amp; authentication</td>
+                    <td>Performance of a contract</td>
+                    <td>Art. 6(1)(b)</td>
+                </tr>
+                <tr>
+                    <td>Processing payments &amp; purchases</td>
+                    <td>Performance of a contract</td>
+                    <td>Art. 6(1)(b)</td>
+                </tr>
+                <tr>
+                    <td>Cloud project storage &amp; sync</td>
+                    <td>Performance of a contract</td>
+                    <td>Art. 6(1)(b)</td>
+                </tr>
+                <tr>
+                    <td>Customer support</td>
+                    <td>Legitimate interest</td>
+                    <td>Art. 6(1)(f)</td>
+                </tr>
+                <tr>
+                    <td>Security &amp; fraud prevention</td>
+                    <td>Legitimate interest</td>
+                    <td>Art. 6(1)(f)</td>
+                </tr>
+                <tr>
+                    <td>Legal compliance (financial records)</td>
+                    <td>Legal obligation</td>
+                    <td>Art. 6(1)(c)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>We do <strong>not</strong> rely on consent as a lawful basis for any core data processing. Where consent is used (e.g., optional marketing emails in the future), it will be freely given, specific, informed, and withdrawable at any time.</p>
+    </div>
+
+    <!-- ─── 4 ─────────────────────────────────────────────── -->
+    <div class="section" id="s4">
+        <h2><span class="num">4.</span> Personal Data We Collect</h2>
+
+        <h3 class="sub">4.1 Account Data</h3>
+        <table>
+            <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+            <tbody>
+                <tr><td>Full name</td><td>Account profile, correspondence</td><td>Server + local</td></tr>
+                <tr><td>Email address</td><td>Login, email confirmation, support</td><td>Server + local</td></tr>
+                <tr><td>Password</td><td>Authentication</td><td>Server (bcrypt hash), local (SHA-256 hash)</td></tr>
+                <tr><td>Phone number (optional)</td><td>Profile, contact</td><td>Server only</td></tr>
+                <tr><td>Company name (optional)</td><td>Profile</td><td>Server only</td></tr>
+            </tbody>
+        </table>
+        <div class="highlight-box">
+            We <strong>never</strong> store your password in plain text. Server-side passwords are hashed with <strong>bcrypt</strong> (adaptive cost factor). Local passwords are hashed with <strong>SHA-256</strong> via the Web Crypto API.
+        </div>
+
+        <h3 class="sub">4.2 Payment Data</h3>
+        <table>
+            <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+            <tbody>
+                <tr><td>Last 4 digits of card number</td><td>Display reference only</td><td>Server + local</td></tr>
+                <tr><td>Card expiry date</td><td>Display reference only</td><td>Server + local</td></tr>
+                <tr><td>Cardholder name (hashed)</td><td>Verification reference</td><td>Server + local</td></tr>
+                <tr><td>PayPal email (if chosen)</td><td>Payment processing</td><td>Server + local</td></tr>
+                <tr><td>Purchase records</td><td>Transaction history, invoices</td><td>Server + local</td></tr>
+            </tbody>
+        </table>
+        <div class="highlight-box">
+            We do <strong>not</strong> store full card numbers, CVV/CVC codes, or PIN numbers. Actual payment processing is handled by external payment processors (PayPal). We only retain a receipt-level summary.
+        </div>
+
+        <h3 class="sub">4.3 Project Data</h3>
+        <table>
+            <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+            <tbody>
+                <tr><td>Project files (JSON)</td><td>Saving architectural designs</td><td>Local IndexedDB + cloud (if logged in)</td></tr>
+                <tr><td>Project metadata</td><td>Name, type, description, address</td><td>Local IndexedDB + cloud</td></tr>
+                <tr><td>Thumbnails (PNG)</td><td>Project preview images</td><td>Local IndexedDB + cloud</td></tr>
+            </tbody>
+        </table>
+        <p>Project data may contain addresses and client contact details that you enter. This data is only stored for your use and is not accessed by HSAN Studios unless you explicitly share it with us for support purposes.</p>
+
+        <h3 class="sub">4.4 Technical Data</h3>
+        <p>We may automatically collect:</p>
+        <ul>
+            <li>IP address (server access logs, retained for security)</li>
+            <li>Browser type and version (error diagnostics)</li>
+            <li>Timestamp of server requests</li>
+        </ul>
+        <p>We do <strong>not</strong> use analytics services, advertising trackers, or fingerprinting technologies.</p>
+    </div>
+
+    <!-- ─── 5 ─────────────────────────────────────────────── -->
+    <div class="section" id="s5">
+        <h2><span class="num">5.</span> How We Use Your Data</h2>
+        <p>We use your personal data exclusively for the following purposes:</p>
+        <ul>
+            <li><strong>Authentication</strong> — verifying your identity when you log in</li>
+            <li><strong>Account management</strong> — profile updates, password changes, account deletion</li>
+            <li><strong>Payment processing</strong> — recording purchases, managing subscriptions</li>
+            <li><strong>Cloud synchronisation</strong> — storing and retrieving your project files across devices</li>
+            <li><strong>Customer support</strong> — responding to your enquiries</li>
+            <li><strong>Security</strong> — rate limiting, fraud prevention, breach detection</li>
+        </ul>
+        <p>We do <strong>not</strong>:</p>
+        <ul>
+            <li>Sell, rent, or trade your personal data</li>
+            <li>Use your data for automated decision-making or profiling</li>
+            <li>Send unsolicited marketing emails</li>
+            <li>Share your project files with any third party</li>
+        </ul>
+    </div>
+
+    <!-- ─── 6 ─────────────────────────────────────────────── -->
+    <div class="section" id="s6">
+        <h2><span class="num">6.</span> Data Storage &amp; Security</h2>
+
+        <h3 class="sub">6.1 Local Storage (Your Device)</h3>
+        <ul>
+            <li>Account data and projects are stored in your browser's <strong>IndexedDB</strong> and <strong>localStorage</strong></li>
+            <li>This data exists only on your device and is not transmitted unless cloud sync is active</li>
+            <li>Clearing your browser data will permanently delete local data</li>
+        </ul>
+
+        <h3 class="sub">6.2 Cloud Server</h3>
+        <ul>
+            <li>When you log in, account and project data is transmitted over <strong>HTTPS</strong> (TLS encryption in transit)</li>
+            <li>Server data is stored in <strong>MongoDB</strong> with access restricted by JWT authentication</li>
+            <li>Passwords are hashed with <strong>bcrypt</strong> (minimum cost factor 10)</li>
+            <li>API endpoints are protected by <strong>rate limiting</strong> and <strong>Helmet.js</strong> security headers</li>
+            <li>Database access requires authentication; no public read/write endpoints exist</li>
+        </ul>
+
+        <h3 class="sub">6.3 Security Measures</h3>
+        <table>
+            <thead><tr><th>Measure</th><th>Implementation</th></tr></thead>
+            <tbody>
+                <tr><td>Encryption in transit</td><td>HTTPS / TLS for all server communication</td></tr>
+                <tr><td>Password hashing</td><td>bcrypt (server), SHA-256 (local)</td></tr>
+                <tr><td>Authentication tokens</td><td>JWT with expiration, stored in localStorage</td></tr>
+                <tr><td>Rate limiting</td><td>20 auth attempts / 15 min; 100 general requests / 15 min</td></tr>
+                <tr><td>Security headers</td><td>Helmet.js (CSP, HSTS, X-Frame-Options, etc.)</td></tr>
+                <tr><td>CORS</td><td>Restricted to allowed origins only</td></tr>
+                <tr><td>Input validation</td><td>Server-side validation on all endpoints</td></tr>
+                <tr><td>No raw credentials stored</td><td>Full card numbers and CVV never stored</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ─── 7 ─────────────────────────────────────────────── -->
+    <div class="section" id="s7">
+        <h2><span class="num">7.</span> Cloud Synchronisation</h2>
+        <p>ARC3D™ offers optional cloud synchronisation to allow you to access your projects from any device:</p>
+        <ul>
+            <li><strong>When active</strong>: project data is transmitted to our server over HTTPS and linked to your authenticated account</li>
+            <li><strong>When offline</strong>: all data remains local in IndexedDB; the application works fully offline</li>
+            <li><strong>Fallback</strong>: if the server is unreachable, local storage is used automatically</li>
+        </ul>
+        <p>Cloud sync is triggered when you save a project while logged in. You can delete individual cloud projects at any time from the Project Database panel, or delete your entire account (which removes all cloud data) via the Dashboard.</p>
+    </div>
+
+    <!-- ─── 8 ─────────────────────────────────────────────── -->
+    <div class="section" id="s8">
+        <h2><span class="num">8.</span> Data Sharing &amp; Third Parties</h2>
+        <p>We do <strong>not</strong> share your personal data with any third parties except in the following limited circumstances:</p>
+        <ul>
+            <li><strong>Payment processors</strong> — PayPal processes payments on our behalf under their own privacy policy. We do not send them your ARC3D™ account data, only the transaction amount.</li>
+            <li><strong>Legal requirements</strong> — if required by law, regulation, or valid legal process (e.g., a court order), we may disclose data to the relevant UK authority.</li>
+            <li><strong>Infrastructure providers</strong> — our server hosting provider processes data on our behalf under a data processing agreement. They do not have independent access to your data.</li>
+        </ul>
+        <p>We do not use:</p>
+        <ul>
+            <li>Google Analytics or any analytics platform</li>
+            <li>Advertising or retargeting networks</li>
+            <li>Social media tracking pixels</li>
+            <li>Any AI/ML training on your data</li>
+        </ul>
+    </div>
+
+    <!-- ─── 9 ─────────────────────────────────────────────── -->
+    <div class="section" id="s9">
+        <h2><span class="num">9.</span> International Data Transfers</h2>
+        <p>Your data is primarily processed and stored in the <strong>United Kingdom</strong>. If data is transferred outside the UK (e.g., if using a cloud hosting provider with international data centres), we ensure that:</p>
+        <ul>
+            <li>The receiving country provides an <strong>adequate level of data protection</strong> as recognised by the UK Secretary of State, or</li>
+            <li>Appropriate safeguards are in place, such as <strong>Standard Contractual Clauses</strong> (UK International Data Transfer Agreement) or <strong>binding corporate rules</strong></li>
+        </ul>
+        <p>You may contact us for details on the specific safeguards applied to any international transfer.</p>
+    </div>
+
+    <!-- ─── 10 ────────────────────────────────────────────── -->
+    <div class="section" id="s10">
+        <h2><span class="num">10.</span> Data Retention</h2>
+        <table>
+            <thead><tr><th>Data Category</th><th>Retention Period</th></tr></thead>
+            <tbody>
+                <tr><td>Account data</td><td>Until you delete your account</td></tr>
+                <tr><td>Cloud project files</td><td>Until you delete the project or your account</td></tr>
+                <tr><td>Local project files</td><td>Until you clear browser data or delete them</td></tr>
+                <tr><td>Purchase records</td><td>6 years from transaction date (HMRC requirement)</td></tr>
+                <tr><td>Server access logs (IP, timestamp)</td><td>90 days, then automatically purged</td></tr>
+                <tr><td>Support correspondence</td><td>2 years from last contact, or until deletion requested</td></tr>
+            </tbody>
+        </table>
+        <p>When you delete your account, all personal data (name, email, password hash, payment methods, cloud projects) is permanently removed from our servers. Purchase records may be retained in anonymised form for financial reporting as required by UK law (HMRC).</p>
+    </div>
+
+    <!-- ─── 11 ────────────────────────────────────────────── -->
+    <div class="section" id="s11">
+        <h2><span class="num">11.</span> Your Rights Under UK GDPR</h2>
+        <p>Under the UK GDPR and the Data Protection Act 2018, you have the following rights:</p>
+
+        <table>
+            <thead><tr><th>Right</th><th>Description</th><th>How to Exercise</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>Access</strong> (Art. 15)</td>
+                    <td>Obtain a copy of all personal data we hold about you</td>
+                    <td>Email support@hsan-studios.com or view in your Dashboard</td>
+                </tr>
+                <tr>
+                    <td><strong>Rectification</strong> (Art. 16)</td>
+                    <td>Correct inaccurate or incomplete data</td>
+                    <td>Update via your Dashboard profile settings</td>
+                </tr>
+                <tr>
+                    <td><strong>Erasure</strong> (Art. 17)</td>
+                    <td>Request deletion of your personal data ("right to be forgotten")</td>
+                    <td>Delete account via Dashboard "Danger Zone" or email us</td>
+                </tr>
+                <tr>
+                    <td><strong>Restriction</strong> (Art. 18)</td>
+                    <td>Request we limit processing of your data</td>
+                    <td>Email support@hsan-studios.com</td>
+                </tr>
+                <tr>
+                    <td><strong>Portability</strong> (Art. 20)</td>
+                    <td>Receive your data in a structured, machine-readable format</td>
+                    <td>Export projects as .ark (JSON) files; email us for account data export</td>
+                </tr>
+                <tr>
+                    <td><strong>Objection</strong> (Art. 21)</td>
+                    <td>Object to processing based on legitimate interest</td>
+                    <td>Email support@hsan-studios.com</td>
+                </tr>
+                <tr>
+                    <td><strong>Withdraw consent</strong> (Art. 7)</td>
+                    <td>Withdraw consent at any time (where consent is the lawful basis)</td>
+                    <td>Email support@hsan-studios.com</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <strong>Response time:</strong> We will respond to all data subject requests within <strong>one calendar month</strong> of receipt, as required by UK GDPR Art. 12(3). If the request is complex, we may extend this by a further two months with notification.
+        </div>
+
+        <p>To verify your identity for a data subject request, we may ask you to confirm your email address and provide additional identifying information. We will not charge a fee for reasonable requests.</p>
+    </div>
+
+    <!-- ─── 12 ────────────────────────────────────────────── -->
+    <div class="section" id="s12">
+        <h2><span class="num">12.</span> Cookies &amp; Local Storage</h2>
+        <p>ARC3D™ does <strong>not</strong> use cookies for tracking, advertising, or analytics.</p>
+        <p>We use the following browser storage mechanisms for essential functionality only:</p>
+        <table>
+            <thead><tr><th>Storage</th><th>Purpose</th><th>Type</th></tr></thead>
+            <tbody>
+                <tr><td>localStorage: <code>arc3d_auth_token</code></td><td>JWT session token for authenticated API calls</td><td>Strictly necessary</td></tr>
+                <tr><td>localStorage: <code>arc3d_server_url</code></td><td>Custom server URL (if configured)</td><td>Strictly necessary</td></tr>
+                <tr><td>localStorage: <code>userSession</code></td><td>Current login session data</td><td>Strictly necessary</td></tr>
+                <tr><td>localStorage: <code>cadModelerAutoSave</code></td><td>Emergency auto-save of current project</td><td>Strictly necessary</td></tr>
+                <tr><td>IndexedDB: <code>ARC3D_UserDB</code></td><td>Local user accounts, payment methods, purchases</td><td>Strictly necessary</td></tr>
+                <tr><td>IndexedDB: <code>ARC3D™ProjectsDB</code></td><td>Saved project files and thumbnails</td><td>Strictly necessary</td></tr>
+            </tbody>
+        </table>
+        <p>Under the Privacy and Electronic Communications Regulations 2003 (PECR), strictly necessary storage does not require consent. These storage items are essential for the software to function and are never used for tracking.</p>
+    </div>
+
+    <!-- ─── 13 ────────────────────────────────────────────── -->
+    <div class="section" id="s13">
+        <h2><span class="num">13.</span> Children's Data</h2>
+        <p>ARC3D™ is professional architectural design software and is not directed at children under the age of <strong>16</strong>.</p>
+        <p>We do not knowingly collect personal data from anyone under 16. If we become aware that we have inadvertently collected data from a child under 16, we will delete it promptly. If you believe a child has provided us with personal data, please contact <strong>support@hsan-studios.com</strong>.</p>
+    </div>
+
+    <!-- ─── 14 ────────────────────────────────────────────── -->
+    <div class="section" id="s14">
+        <h2><span class="num">14.</span> Data Breach Procedures</h2>
+        <p>In the event of a personal data breach, HSAN Studios will:</p>
+        <ol>
+            <li><strong>Assess</strong> the breach within 24 hours of discovery to determine its scope and severity</li>
+            <li><strong>Notify the ICO</strong> within <strong>72 hours</strong> of becoming aware of the breach, if it is likely to result in a risk to the rights and freedoms of individuals (UK GDPR Art. 33)</li>
+            <li><strong>Notify affected individuals</strong> without undue delay if the breach is likely to result in a <strong>high risk</strong> to their rights and freedoms (UK GDPR Art. 34)</li>
+            <li><strong>Document</strong> the breach, its effects, and the remedial actions taken in our internal breach register</li>
+            <li><strong>Remediate</strong> by fixing the vulnerability, rotating affected credentials, and implementing additional safeguards</li>
+        </ol>
+    </div>
+
+    <!-- ─── 15 ────────────────────────────────────────────── -->
+    <div class="section" id="s15">
+        <h2><span class="num">15.</span> Changes to This Policy</h2>
+        <p>We may update this Data Protection Policy from time to time to reflect changes in our practices, technology, or legal requirements.</p>
+        <ul>
+            <li><strong>Material changes</strong> will be communicated via the website, in-app notification, or email</li>
+            <li>The "Last updated" date at the top of this page will always reflect the most recent revision</li>
+            <li>Continued use of ARC3D™ after a policy update constitutes acceptance of the revised policy</li>
+        </ul>
+        <p>We encourage you to review this policy periodically.</p>
+    </div>
+
+    <!-- ─── 16 ────────────────────────────────────────────── -->
+    <div class="section" id="s16">
+        <h2><span class="num">16.</span> Complaints &amp; Contact</h2>
+        <p>If you have any questions, concerns, or complaints about how your data is handled, you can contact us:</p>
+        <div class="contact-card">
+            <p><strong>HSAN Studios — Data Protection</strong></p>
+            <p>45 Merefield Street, Rochdale, OL11 3RH, United Kingdom</p>
+            <p>Email: <strong>support@hsan-studios.com</strong></p>
+            <p>Website: <strong>hsan-studios.com</strong></p>
+        </div>
+        <p style="margin-top:16px;">If you are not satisfied with our response, you have the right to lodge a complaint with the <strong>Information Commissioner's Office (ICO)</strong>:</p>
+        <div class="contact-card">
+            <p><strong>Information Commissioner's Office</strong></p>
+            <p>Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF</p>
+            <p>Helpline: <strong>0303 123 1113</strong></p>
+            <p>Website: <strong>ico.org.uk</strong></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 HSAN Studios — a Private Limited Company. All Rights Reserved.</p>
+    <p style="margin-top:4px;">ARC3D™ is a registered trademark of HSAN Studios.</p>
+</footer>
+
+</body>
+</html>

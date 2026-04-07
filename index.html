@@ -3636,6 +3636,8 @@
                 </p>
                 <p class="footer-privacy-link">
                     <a href="javascript:void(0)" onclick="openPrivacyPolicy()">Privacy Policy</a>
+                    &nbsp;·&nbsp;
+                    <a href="gdpr.html">GDPR &amp; Data Protection</a>
                 </p>
             </div>
             
@@ -5688,13 +5690,12 @@
             <p>We do <strong>not</strong> store full card numbers, CVV codes, or any raw payment credentials.</p>
 
             <h4>3. How Your Data Is Stored</h4>
-            <p>All data is stored <strong>locally on your device</strong> using browser localStorage and IndexedDB. We do not transmit your account data, project files, or payment information to any external server unless you explicitly opt into cloud synchronisation (a future feature).</p>
-            <p>Because data is stored locally:</p>
+            <p>Data is stored in two locations:</p>
             <ul>
-                <li>Clearing your browser data will delete your account and projects</li>
-                <li>Your data is only accessible on the device and browser where it was created</li>
-                <li>No third-party servers or databases are involved</li>
+                <li><strong>Locally on your device</strong> — using browser localStorage and IndexedDB for offline access</li>
+                <li><strong>Cloud server</strong> — when you are logged in, your account data and project files are synced to our secure server (MongoDB, encrypted in transit via HTTPS) so you can access them from any device</li>
             </ul>
+            <p>If the server is unreachable, the application works fully offline using local data. Clearing your browser data will remove local copies but cloud data remains accessible by logging in again.</p>
 
             <h4>4. How We Use Your Information</h4>
             <p>We use your information solely to:</p>
@@ -5710,7 +5711,7 @@
             <p>ARC3D&#8482; does not use cookies for tracking or advertising. We use browser localStorage to maintain your session and preferences. No analytics, tracking pixels, or third-party scripts are embedded in the application.</p>
 
             <h4>6. Third-Party Services</h4>
-            <p>ARC3D&#8482; does not integrate with or send data to any third-party services, advertising networks, or analytics platforms. All functionality operates entirely within your browser.</p>
+            <p>ARC3D&#8482; does not use advertising networks or analytics platforms. When you are logged in, data is transmitted to our own secure server for cloud synchronisation. Payment processing is handled by PayPal under their own privacy policy.</p>
 
             <h4>7. Your Rights (GDPR)</h4>
             <p>Under the UK General Data Protection Regulation (UK GDPR), you have the right to:</p>
@@ -5721,15 +5722,17 @@
                 <li><strong>Portability</strong> &#8212; your data is stored locally and accessible to you at all times</li>
                 <li><strong>Objection</strong> &#8212; contact us if you have concerns about data processing</li>
             </ul>
-            <p>Since all data is stored on your device, you have full control over it at all times.</p>
+            <p>You have full control over your data at all times. Local data is on your device; cloud data can be deleted from your Dashboard or by deleting your account.</p>
+            <p>For our full UK GDPR-compliant data protection policy, see <a href="gdpr.html" style="color:#6366f1;text-decoration:underline;">Data Protection &amp; GDPR Policy</a>.</p>
 
             <h4>8. Data Security</h4>
             <p>We implement the following security measures:</p>
             <ul>
-                <li>Passwords are hashed using SHA-256 via the Web Crypto API</li>
+                <li>Passwords are hashed with <strong>bcrypt</strong> (server) and <strong>SHA-256</strong> (local)</li>
                 <li>Cardholder names are hashed before storage</li>
                 <li>Full card numbers and CVV codes are never stored</li>
-                <li>No data is transmitted to external servers</li>
+                <li>All server communication uses HTTPS (TLS encryption)</li>
+                <li>API endpoints are protected by JWT authentication, rate limiting, and security headers</li>
             </ul>
 
             <h4>9. Children's Privacy</h4>
