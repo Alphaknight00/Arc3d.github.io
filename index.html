@@ -1297,23 +1297,22 @@
             align-items: center;
             gap: 0.75rem;
             padding: 1.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            transition: border-color 0.2s ease, background 0.2s ease;
-            min-width: 140px;
+            border: none;
+            border-radius: 0;
+            background: none;
+            transition: opacity 0.2s ease;
+            min-width: 160px;
             flex-shrink: 0;
         }
 
         .tech-logo-item:hover {
-            border-color: rgba(59, 130, 246, 0.25);
-            background: rgba(59, 130, 246, 0.04);
+            opacity: 0.8;
         }
 
         .tech-logo-item svg,
         .tech-logo-item img {
-            width: 48px;
-            height: 48px;
+            width: 72px;
+            height: 72px;
             opacity: 0.7;
             transition: opacity 0.2s ease;
         }
@@ -3354,6 +3353,27 @@
             background: rgba(231, 76, 60, 0.06);
             border: 1px solid rgba(231, 76, 60, 0.15);
         }
+        .auth-success {
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+        .forgot-password-row {
+            text-align: right;
+            margin: -0.25rem 0 0.75rem;
+        }
+        .forgot-password-link {
+            background: none;
+            border: none;
+            color: var(--accent-blue);
+            font-size: 0.78rem;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+        }
+        #forgotStep2 {
+            display: none;
+        }
         .tc-error {
             color: #e74c3c;
         }
@@ -5175,8 +5195,8 @@
                 </div>
                 
                 <div id="loginError" class="auth-error"></div>
-                <div style="text-align:right;margin:-0.25rem 0 0.75rem;">
-                    <button type="button" onclick="switchToForgotPassword()" style="background:none;border:none;color:var(--accent-blue);font-size:0.78rem;cursor:pointer;padding:0;text-decoration:underline;">Forgot Password?</button>
+                <div class="forgot-password-row">
+                    <button type="button" onclick="switchToForgotPassword()" class="forgot-password-link">Forgot Password?</button>
                 </div>
                 <button type="submit" class="auth-submit-btn">Sign In</button>
             </form>
@@ -5229,7 +5249,7 @@
             </div>
 
             <!-- Step 2: Enter code + new password -->
-            <div id="forgotStep2" style="display:none;">
+            <div id="forgotStep2">
                 <div class="auth-modal-header">
                     <h2>Reset Password</h2>
                     <p>Enter the 6-digit code sent to your email and choose a new password</p>
@@ -5249,7 +5269,7 @@
                         <input type="password" id="resetConfirmPassword" name="confirmPassword" placeholder="Confirm new password" required>
                     </div>
                     <div id="resetError" class="auth-error"></div>
-                    <div id="resetSuccess" class="auth-error" style="color:#22c55e;background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.2);"></div>
+                    <div id="resetSuccess" class="auth-error auth-success"></div>
                     <button type="submit" class="auth-submit-btn">Reset Password</button>
                 </form>
                 <div class="auth-switch">
